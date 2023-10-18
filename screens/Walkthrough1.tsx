@@ -22,7 +22,8 @@ const buttonContainerStyle = StyleSheet.create({
         width: '100%',
         alignItems: 'center',
         position: 'absolute',
-        bottom: 0
+        bottom: 0,
+        marginBottom: 40
 
     }
 })
@@ -69,8 +70,8 @@ const buttonStyles = StyleSheet.create({
        backgroundColor: '#003359',
        padding: 10,
        borderRadius: 12, 
-       width: 340,
-       height: 50
+       width: '80%',
+       height: 50,
      
     },
   
