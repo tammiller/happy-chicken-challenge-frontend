@@ -8,6 +8,8 @@ import CreateAccount from './screens/CreateAccount';
 import LogIn from './screens/LogIn';
 import Loading from './screens/Loading';
 import GoalSetting from './screens/GoalSetting';
+import ProgressBar from './screens/ProgressBar';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,7 @@ export default function App() {
         <Stack.Screen name="LogIn" component={LogIn} />
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="GoalSetting" component={GoalSetting} />
+        <Stack.Screen name="ProgressBar" component={ProgressBar} />
       </Stack.Navigator>
     </NavigationContainer>
   );
