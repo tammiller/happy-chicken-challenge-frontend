@@ -8,6 +8,8 @@ import CreateAccount from './screens/CreateAccount';
 import LogIn from './screens/LogIn';
 import Loading from './screens/Loading';
 import GoalSetting from './screens/GoalSetting';
+import Walkthrough2 from './screens/Walkthrough2';
+import Walkthrough3 from './screens/Walkthrough3';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +18,8 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Walkthrough1">
         <Stack.Screen name="Walkthrough1" component={Walkthrough1} />
+        <Stack.Screen name="Walkthrough2" component={Walkthrough2} />
+        <Stack.Screen name="Walkthrough3" component={Walkthrough3} />
         <Stack.Screen name="SignInOrCreate" component={SignInOrCreate} />
         <Stack.Screen name="CreateAccount" component={CreateAccount} />
         <Stack.Screen name="LogIn" component={LogIn} />
