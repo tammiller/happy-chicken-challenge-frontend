@@ -2,30 +2,39 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function Walkthrough1( {navigation}: { navigation: any } ) {
+export default function SignInOrCreate({ navigation }: { navigation: any }) {
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
-        <Text style={textStyles.title}>Personalized transition support </Text>
-        <Text style={textStyles.subtitle}>
-          Enable personalized goal setting for a smooth transition to a
-          plant-based lifestyle, prioritizing individual motivations and
-          preferences.
-        </Text>
+        <Text style={textStyles.title}>Veggie Voyager Logo </Text>
       </View>
+
       <View style={buttonContainerStyle.container}>
         <Pressable
           style={buttonStyles.button}
           onPress={() => {
             /* 1. Navigate to the GoalSetting route with params */
-            navigation.navigate("SignInOrCreate", {
+            navigation.navigate("CreateAccount", {
               itemId: 86,
               otherParam: "anything you want here",
             });
           }}
         >
-          <Text style={buttonStyles.buttonText}>Continue</Text>
+          <Text style={buttonStyles.buttonText}>Create Account</Text>
         </Pressable>
+
+        <Text
+          style={textStyles.button}
+          onPress={() => {
+            /* 1. Navigate to the GoalSetting route with params */
+            navigation.navigate("LogIn", {
+              itemId: 86,
+              otherParam: "anything you want here",
+            });
+          }}
+        >
+          Log In
+        </Text>
       </View>
     </View>
   );
@@ -60,22 +69,28 @@ const containerStyles = StyleSheet.create({
 });
 
 const textStyles = StyleSheet.create({
-    title: {
-      fontSize: 24,
-      fontWeight: "bold",
-      textAlign: "left",
-    },
-    subtitle: {
-      fontSize: 20,
-      textAlign: "left",
-      marginTop: 34,
-    },
-    body: {
-      fontSize: 12,
-      textAlign: "left",
-      marginTop: 34,
-    },
-  });
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "left",
+  },
+  subtitle: {
+    fontSize: 20,
+    textAlign: "left",
+    marginTop: 34,
+  },
+  body: {
+    fontSize: 12,
+    textAlign: "left",
+    marginTop: 34,
+  },
+  button: {
+    fontSize: 20,
+    color: "#003359",
+    bottom: 20,
+    paddingTop: 10
+  }
+});
 
 const buttonStyles = StyleSheet.create({
   button: {

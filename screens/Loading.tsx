@@ -2,30 +2,11 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function Walkthrough1( {navigation}: { navigation: any } ) {
+export default function Loading( {navigation}: { navigation: any } ) {
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
-        <Text style={textStyles.title}>Personalized transition support </Text>
-        <Text style={textStyles.subtitle}>
-          Enable personalized goal setting for a smooth transition to a
-          plant-based lifestyle, prioritizing individual motivations and
-          preferences.
-        </Text>
-      </View>
-      <View style={buttonContainerStyle.container}>
-        <Pressable
-          style={buttonStyles.button}
-          onPress={() => {
-            /* 1. Navigate to the GoalSetting route with params */
-            navigation.navigate("SignInOrCreate", {
-              itemId: 86,
-              otherParam: "anything you want here",
-            });
-          }}
-        >
-          <Text style={buttonStyles.buttonText}>Continue</Text>
-        </Pressable>
+        <Text style={textStyles.title}>Sit tight, we're setting everything for you.</Text>
       </View>
     </View>
   );
