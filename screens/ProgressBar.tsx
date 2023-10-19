@@ -20,12 +20,13 @@ const ProgressBar = () => {
         </View>
 
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    
       <CircularProgress
         size={200} 
         width={15} 
         fill={percentage} 
-        tintColor="#00E0D7" 
-        backgroundColor="#ccc" 
+        tintColor="#265F68" 
+        backgroundColor="#A2FC9D" 
       >
         {(fill : number) => (
           <Text style={{ fontSize: 24 }}>{Math.round(fill)}%</Text>
