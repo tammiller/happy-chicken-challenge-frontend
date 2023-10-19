@@ -1,8 +1,5 @@
 import {View, Text, TextInput, StyleSheet, Pressable} from 'react-native';
 import * as React from 'react';
-import Walkthrough1 from './Walkthrough1';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 
@@ -10,7 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
     function submitHandler(){
-       navigation.navigate(Walkthrough1);
+       navigation.navigate('Walkthrough1');
     }
     return (
         <View style={styles.parentContainer}>
