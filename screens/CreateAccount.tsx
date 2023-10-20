@@ -1,28 +1,103 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { View, Text, StyleSheet, Pressable, TextInput, Alert } from "react-native";
+import { useState } from "react";
 
 export default function CreateAccount( {navigation}: { navigation: any } ) {
+
+  const[email, setEmail] = useState('');
+  const[password, setPasswrod] = useState('');
+  const[name, setName] = useState('');
+
+  const[isNameValid, setNameValid] = useState(false);
+  const[isEmailValid, setEmailValid] = useState(false);
+  const[isPsswordValid, setPsswordValid] = useState(false);
+  
+
+   function onNameChangeHandler(enteredText: string){
+      setName(enteredText);
+    //   console.log('name '+name.length);
+      setNameValid(name !== '' ? name.length>0 : false);
+      return isNameValid;
+   }
+
+   function onEmailChangeHandler(enteredText: string){
+    setEmail(enteredText);
+    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+    setEmailValid(email.length>0 ? reg.test(enteredText) === true : false);
+    return isEmailValid;
+   }
+
+   function onPasswordChangeHandler(enteredText: string){
+    setPasswrod(enteredText);
+    setPsswordValid(password.length>0);
+    return isPsswordValid;
+   }
+
+   const invalidAlert = ( fieldName: string) => {
+   // console.log("invalid Alert called for "+fieldName);
+    Alert.alert(
+      'Invalid Entry!',
+      'Please enter a valid '+fieldName,
+      [
+        {
+          text: 'OK',
+          onPress: () => {},
+          style: 'cancel',
+        },
+      ],
+      {
+        cancelable: true,
+       
+      },
+    );
+   }
+
+
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
-        <Text style={textStyles.title}>Create your account </Text>
+        <Text style={textStyles.title}>Create your account</Text>
+        <View style={{width: '100%', height: 40}}></View>
+        <Text style={textStyles.body}>Name</Text>
+        <TextInput style={textInputStyles(isNameValid).textInput} onChangeText={onNameChangeHandler}></TextInput>
+        <Text style={textStyles.body}>Email</Text>
+        <TextInput style={textInputStyles(isEmailValid).textInput} onChangeText={onEmailChangeHandler}></TextInput>
+        <Text style={textStyles.body}>Password</Text>
+        <TextInput style={textInputStyles(isPsswordValid).textInput} onChangeText={onPasswordChangeHandler}></TextInput>
+   
       </View>
       <View style={buttonContainerStyle.container}>
         <Pressable
           style={buttonStyles.button}
           onPress={() => {
             /* 1. Navigate to the GoalSetting route with params */
-            navigation.navigate("GoalSetting", {
-              itemId: 86,
-              otherParam: "anything you want here",
-            });
+           // console.log("isNameValid: "+isNameValid+ " with "+name +" isEmailValid: "+isEmailValid+ " isPasswordValid: "+isPsswordValid );
+            if(!isNameValid){invalidAlert('Name')}
+            else if(!isEmailValid){invalidAlert('Email id')}
+            else if(!isPsswordValid){invalidAlert('Password')}
+            else{
+              navigation.navigate("GoalSetting", {
+                itemId: 86,
+                otherParam: "anything you want here",
+              });
+          }
           }}
         >
-          <Text style={buttonStyles.buttonText}>Create Account</Text>
+        <Text style={buttonStyles.buttonText}>Create Account</Text>
         </Pressable>
       </View>
+      {/* <View style={buttonContainerStyle.linkContainer}> */}
+      <Pressable 
+      onPress={()=>{
+          navigation.navigate("LogIn", {
+            itemId: 86,
+            otherParam: "some"
+          })
+      }}
+      >
+      <Text style={textStyles.linkText}>Already have account?Login</Text>
+      </Pressable>
     </View>
+    // </View>
   );
 }
 
@@ -30,9 +105,14 @@ const buttonContainerStyle = StyleSheet.create({
   container: {
     width: "100%",
     alignItems: "center",
-    position: "absolute",
-    bottom: 20,
+   
   },
+  linkContainer: {
+    width: "100%",
+    justifyContent: 'center',
+    marginBottom: 50
+    
+  }
 });
 
 const mainContainerStyle = StyleSheet.create({
@@ -40,17 +120,18 @@ const mainContainerStyle = StyleSheet.create({
     width: "100%",
     height: "100%",
     justifyContent: "center",
+    backgroundColor: '#fff',
   },
 });
 
 const containerStyles = StyleSheet.create({
   container: {
-    width: 250,
-    marginStart: 40,
-    marginEnd: 40,
-    bottom: 50,
-    justifyContent: "center",
-    alignSelf: "center",
+    flex:1,
+    width: '100%',
+    paddingTop: 30,
+    paddingLeft: 30,
+    paddingRight: 30
+    
   },
 });
 
@@ -59,6 +140,8 @@ const textStyles = StyleSheet.create({
       fontSize: 24,
       fontWeight: "bold",
       textAlign: "left",
+      marginTop:50,
+  
     },
     subtitle: {
       fontSize: 20,
@@ -66,11 +149,38 @@ const textStyles = StyleSheet.create({
       marginTop: 34,
     },
     body: {
-      fontSize: 12,
+      fontSize: 18,
       textAlign: "left",
-      marginTop: 34,
+      marginTop: 20,
+    
     },
+    textInput: {
+      width: '100%',
+      height: 40,
+      backgroundColor: '#F5F5F5',
+      marginTop: 10,
+      borderRadius: 4,
+    },
+    linkText: {
+      fontSize: 14,
+      textAlign: 'center',
+      marginBottom: 40
+    }
   });
+
+  const textInputStyles = (isValid: boolean)=>StyleSheet.create({
+   textInput: { 
+    width: '100%',
+    height: 40,
+    backgroundColor: '#F5F5F5',
+    marginTop: 10,
+    borderRadius: 4,
+    
+    padding: 5
+
+  }
+
+  })
 
 const buttonStyles = StyleSheet.create({
   button: {

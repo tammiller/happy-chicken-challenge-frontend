@@ -7,8 +7,7 @@ export default function Walkthrough3( {navigation}: { navigation: any } ) {
     <View style={mainContainerStyle.container}>
     <View style={containerStyles.container}>
       <Text style={textStyles.title}>Motivation and inspiration</Text>
-      <Text style={textStyles.subtitle}>
-      Stay motivated with supports, quotes, resources, and tips that inspire you and keep your enthusiasm high throughout your plant-based journey.
+      <Text style={textStyles.subtitle}>Stay motivated with supports, quotes, resources, and tips that inspire you and keep your enthusiasm high throughout your plant-based journey.
       </Text>
     </View>
     <View style={buttonContainerStyle.container}>

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -6,7 +6,8 @@ export default function SignInOrCreate({ navigation }: { navigation: any }) {
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
-        <Text style={textStyles.title}>Veggie Voyager Logo </Text>
+        <Image source={require('../assets/logo.png')} style={containerStyles.logoStyle}></Image>
+        <Text style={textStyles.title}>Veggie{'\n'}Voyager</Text>
       </View>
 
       <View style={buttonContainerStyle.container}>
@@ -59,20 +60,25 @@ const mainContainerStyle = StyleSheet.create({
 
 const containerStyles = StyleSheet.create({
   container: {
-    width: 250,
-    marginStart: 40,
-    marginEnd: 40,
-    bottom: 50,
-    justifyContent: "center",
-    alignSelf: "center",
+    flex: 1,
+    width: '100%',
+    alignContent: "center",
   },
+  logoStyle: {
+    width: 100,
+    height: 100,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginTop: 100
+  }
 });
 
 const textStyles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: "bold",
-    textAlign: "left",
+    textAlign: "center",
+    marginTop: 20
   },
   subtitle: {
     fontSize: 20,
@@ -109,3 +115,5 @@ const buttonStyles = StyleSheet.create({
     textAlign: "center",
   },
 });
+
+

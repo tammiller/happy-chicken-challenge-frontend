@@ -16,7 +16,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Walkthrough1">
+      <Stack.Navigator initialRouteName="CreateAccount">
         <Stack.Screen name="Walkthrough1" component={Walkthrough1} />
         <Stack.Screen name="Walkthrough2" component={Walkthrough2} />
         <Stack.Screen name="Walkthrough3" component={Walkthrough3} />

@@ -7,8 +7,7 @@ export default function Walkthrough2( {navigation}: { navigation: any } ) {
     <View style={mainContainerStyle.container}>
     <View style={containerStyles.container}>
       <Text style={textStyles.title}>Dietary flexibility</Text>
-      <Text style={textStyles.subtitle}>
-      Adapts to your dietary choices and habits, ensuring support matches your level of commitment during your transition.
+      <Text style={textStyles.subtitle}>Adapts to your dietary choices and habits, ensuring support matches your level of commitment during your transition.
       </Text>
     </View>
     <View style={buttonContainerStyle.container}>
