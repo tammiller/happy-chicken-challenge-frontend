@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export default function Walkthrough1( {navigation}: { navigation: any } ) {
@@ -7,8 +7,7 @@ export default function Walkthrough1( {navigation}: { navigation: any } ) {
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
         <Text style={textStyles.title}>Personalized transition support </Text>
-        <Text style={textStyles.subtitle}>
-          Enable personalized goal setting for a smooth transition to a
+        <Text style={textStyles.subtitle}>Enable personalized goal setting for a smooth transition to a
           plant-based lifestyle, prioritizing individual motivations and
           preferences.
         </Text>
