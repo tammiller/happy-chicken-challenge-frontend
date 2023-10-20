@@ -75,7 +75,7 @@ export default function CreateAccount( {navigation}: { navigation: any } ) {
             else if(!isEmailValid){invalidAlert('Email id')}
             else if(!isPsswordValid){invalidAlert('Password')}
             else{
-              navigation.navigate("GoalSetting", {
+              navigation.navigate("Walkthrough1", {
                 itemId: 86,
                 otherParam: "anything you want here",
               });

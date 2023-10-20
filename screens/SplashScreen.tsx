@@ -2,40 +2,12 @@ import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function SignInOrCreate({ navigation }: { navigation: any }) {
+export default function SplashScreen({ navigation }: { navigation: any }) {
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
         <Image source={require('../assets/logo.png')} style={containerStyles.logoStyle}></Image>
         <Text style={textStyles.title}>Veggie{'\n'}Voyager</Text>
-      </View>
-
-      <View style={buttonContainerStyle.container}>
-        <Pressable
-          style={buttonStyles.button}
-          onPress={() => {
-            /* 1. Navigate to the GoalSetting route with params */
-            navigation.navigate("CreateAccount", {
-              itemId: 86,
-              otherParam: "anything you want here",
-            });
-          }}
-        >
-          <Text style={buttonStyles.buttonText}>Create Account</Text>
-        </Pressable>
-
-        <Text
-          style={textStyles.button}
-          onPress={() => {
-            /* 1. Navigate to the GoalSetting route with params */
-            navigation.navigate("LogIn", {
-              itemId: 86,
-              otherParam: "anything you want here",
-            });
-          }}
-        >
-          Log In
-        </Text>
       </View>
     </View>
   );

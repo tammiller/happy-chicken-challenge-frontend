@@ -15,7 +15,7 @@ export default function Walkthrough3( {navigation}: { navigation: any } ) {
         style={buttonStyles.button}
         onPress={() => {
           /* 1. Navigate to the GoalSetting route with params */
-          navigation.navigate("SignInOrCreate", {
+          navigation.navigate("GoalSetting", {
             itemId: 86,
             otherParam: "anything you want here",
           });
