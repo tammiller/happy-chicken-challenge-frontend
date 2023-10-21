@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, Pressable, TextInput, Alert } from "react-native";
 import { useState } from "react";
+import axios from "axios";
 
 export default function CreateAccount({ navigation }: { navigation: any }) {
   const [email, setEmail] = useState("");
@@ -48,6 +49,26 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
     );
   };
 
+  const signUpUser = () => {
+    axios
+      .post(`http://18.153.74.70/users/signUp`, {
+        emailId: email,
+        name: name,
+        password: password
+    })
+      .then((response) => {
+        // if account successfully created, go to walkthrough
+        navigation.navigate("Walkthrough1", {
+          itemId: 86,
+          otherParam: "anything you want here",
+        });
+      })
+      .catch((error) => {
+        // if account NOT successfully created, display error message
+        Alert.alert("Error", "Sorry, we're having trouble creating your account right now. Please come back and try again later.");
+      });
+  };
+
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
@@ -82,10 +103,7 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
             } else if (!isPsswordValid) {
               invalidAlert("Password");
             } else {
-              navigation.navigate("Walkthrough1", {
-                itemId: 86,
-                otherParam: "anything you want here",
-              });
+              signUpUser()
             }
           }}
         >
@@ -101,7 +119,7 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
           });
         }}
       >
-        <Text style={textStyles.linkText}>Already have account?Login</Text>
+        <Text style={textStyles.linkText}>Already have account? Log in.</Text>
       </Pressable>
     </View>
     // </View>
