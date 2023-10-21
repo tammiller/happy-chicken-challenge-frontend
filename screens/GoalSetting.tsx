@@ -4,12 +4,11 @@ export default function GoalSetting() {
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
-        <Text style={textStyles.title}>Welcome!</Text>
-        <Text style={textStyles.subtitle}>Start setting your goal.</Text>
-        <Text style={textStyles.body}>Name your goal</Text>
+        <Text style={textStyles.title}>Setting your goal</Text>
+        <Text style={textStyles.subtitle}>Name your goal</Text>
         <TextInput style={inputStyles.input}></TextInput>
-        <Text style={textStyles.body}>Select time</Text>
-        
+        <Text style={textStyles.subtitle}>Select time</Text>
+
       </View>
 
       <View style={buttonContainerStyle.container}>
@@ -34,29 +33,34 @@ const mainContainerStyle = StyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    paddingTop: 200
   },
 });
 
 const containerStyles = StyleSheet.create({
     container: {
-      width: 250,
-      marginStart: 40,
-      marginEnd: 40,
-      bottom: 50,
-      justifyContent: "center",
-      alignSelf: "center",
+      width: '100%',
+      alignItems: 'flex-start',
+      padding: 30
     },
+
+    durationContainer: {
+      backgroundColor: '#F5F5F5',
+      borderRadius: 12,
+      padding: 10,
+      textAlign: 'center'
+    }
   });
 
 const textStyles = StyleSheet.create({
   title: {
     fontSize: 24,
-    fontWeight: "bold",
     textAlign: "left",
   },
   subtitle: {
-    fontSize: 20,
+    fontSize: 16,
     textAlign: "left",
     marginTop: 34,
   },
