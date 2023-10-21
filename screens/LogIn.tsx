@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Pressable, TextInput, Alert } from "react-nativ
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useState } from "react";
+import axios from "axios";
+import { REACT_APP_API } from '@env';
 
 export default function LogIn( {navigation}: { navigation: any } ) {
 
@@ -44,6 +46,23 @@ export default function LogIn( {navigation}: { navigation: any } ) {
      );
     }
 
+    const signInUser = () => {
+      axios
+        .post(`${REACT_APP_API}/users`, {
+          email,
+          password,
+        })
+        .then((response) => {
+          // Successfully logged in the user
+          console.log("User logged in:", response.data);
+        })
+        .catch((error) => {
+          // Handle the error case
+          console.error("Error logging in user:", error);
+          Alert.alert("Error", "Failed to log in the user. Please try again.");
+        });
+    };
+
 
   return (
     <View style={mainContainerStyle.container}>
@@ -64,10 +83,11 @@ export default function LogIn( {navigation}: { navigation: any } ) {
             if(!isEmailValid){invalidAlert('Email id')}
             else if(!isPsswordValid){invalidAlert('Password')}
             else{
-            navigation.navigate("Walkthrough1", {
-              itemId: 86,
-              otherParam: "anything you want here",
-            });
+              signInUser()
+              navigation.navigate("Walkthrough1", {
+                itemId: 86,
+                otherParam: "anything you want here",
+              });
           }
           }}
         >
@@ -77,10 +97,10 @@ export default function LogIn( {navigation}: { navigation: any } ) {
       <View style={buttonContainerStyle.linkContainer}>
       <Pressable 
       onPress={()=>{
-          navigation.navigate("CreateAccount", {
-            itemId: 86,
-            otherParam: ""
-          })
+        navigation.navigate("CreateAccount", {
+          itemId: 86,
+          otherParam: ""
+        })
       }}
       >
       <Text style={textStyles.linkText}>Don't have account?Sign up</Text>
