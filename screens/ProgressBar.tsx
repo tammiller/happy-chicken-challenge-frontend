@@ -15,8 +15,8 @@ const ProgressBar = () => {
 
     <View>
         <View>
-            <Icon source = {require('../../assets/bellIcon.png')} width ={10} height={10}  />  
-            <Icon source = {require('../../assets/ringIcon.png')} width ={10} height={10}  />  
+            <Icon source = {require('../assets/bellIcon.png')} width ={10} height={10}  />  
+            <Icon source = {require('../assets/ringIcon.png')} width ={10} height={10}  />  
         </View>
 
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -38,13 +38,13 @@ const ProgressBar = () => {
 
        <View>
        
-        <Icon source = {require('../../assets/imoji.png')} width ={30} height={20}  /> 
+        <Icon source = {require('../assets/imoji.png')} width ={30} height={20}  /> 
        </View>
 
        <View>
-        <Icon source = {require('../../assets/home.png')} width ={15} height={15}  /> 
-        <Icon source = {require('../../assets/journey.png')} width ={15} height={15}  /> 
-        <Icon source = {require('../../assets/challenge.png')} width ={15} height={15}  /> 
+        <Icon source = {require('../assets/home.png')} width ={15} height={15}  /> 
+        <Icon source = {require('../assets/journey.png')} width ={15} height={15}  /> 
+        <Icon source = {require('../assets/challenge.png')} width ={15} height={15}  /> 
        </View>
 
     </View>
