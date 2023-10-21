@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState}from 'react';
 import { View, Text} from 'react-native';
-import CircularProgress from 'react-native-circular-progress';
+import CircularProgress from 'react-native-circular-progress-indicator';
 import Icon from '../components/Icon'; 
+
 
 
 const ProgressBar = () => {
    
-  const percentage = 70; // Change this with props
-  const currentDate = new Date();
-
-  const formattedDate = currentDate.toDateString();
+ const [value, setValue] = useState(0);
+ const currentDate = new Date();
+ const formattedDate = currentDate.toDateString();
 
   return (
 
@@ -22,16 +22,13 @@ const ProgressBar = () => {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
     
       <CircularProgress
-        size={200} 
-        width={15} 
-        fill={percentage} 
-        tintColor="#265F68" 
-        backgroundColor="#A2FC9D" 
-      >
-        {(fill : number) => (
-          <Text style={{ fontSize: 24 }}>{Math.round(fill)}%</Text>
-        )}
-      </CircularProgress>
+        radius={90}
+        value = {value}
+        activeStrokeColor='#265F68'
+        inActiveStrokeColor='#A2FC9D'
+        inActiveStrokeOpacity={0.2}
+        />
+
     </View>
 
         <View> 
