@@ -12,7 +12,18 @@ export default function LogIn( {navigation}: { navigation: any } ) {
 
   const[isEmailValid, setEmailValid] = useState(false);
   const[isPsswordValid, setPsswordValid] = useState(false);
-
+  interface Challenge {
+    id: String,
+    userId: String,
+    start: Date,
+    numDays: Number,
+    dailyEntries: DailyEntry []
+  }
+  interface DailyEntry {
+    id: Number,
+    entryDate: Date,
+    status: String
+  }
 
   function onEmailChangeHandler(enteredText: string){
     setEmail(enteredText);
@@ -48,13 +59,21 @@ export default function LogIn( {navigation}: { navigation: any } ) {
 
     const signInUser = () => {
       axios
-        .post(`${REACT_APP_API}/users`, {
-          email,
-          password,
-        })
+        .post(`http://18.153.74.70/users`, {
+          emailId: "test@gmail.com",
+          name: "Voyager test"
+      })
         .then((response) => {
           // Successfully logged in the user
           console.log("User logged in:", response.data);
+          var userChallenge: Challenge = response.data;
+          if (userChallenge == null) {
+            // redirect to goal setting page
+          } else {
+            // redirect to challenge page sending user challenge as props
+          }
+          console.log(userChallenge.userId);
+          
         })
         .catch((error) => {
           // Handle the error case
