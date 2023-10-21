@@ -136,8 +136,7 @@ const buttonContainerStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'flex-end',
     marginBottom: 20,
-    flex: 1,
-    flexDirection: 'column'
+    
   },
   linkContainer: {
     width: "100%",
@@ -150,6 +149,7 @@ const mainContainerStyle = StyleSheet.create({
     width: "100%",
     height: "100%",
     justifyContent: "center",
+    backgroundColor:'#fff'
   },
 });
 
@@ -157,7 +157,7 @@ const containerStyles = StyleSheet.create({
   container: {
     flex:1,
     padding:30,
-    backgroundColor:'#fff'
+    
   },
 
   inputContainer: {
