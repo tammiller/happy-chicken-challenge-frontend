@@ -57,11 +57,11 @@ export default function LogIn( {navigation}: { navigation: any } ) {
      );
     }
 
-    const signInUser = () => {
+    const logInUser = () => {
       axios
-        .post(`http://18.153.74.70/users`, {
-          emailId: "test@gmail.com",
-          name: "Voyager test"
+        .post(`http://18.153.74.70/users/login`, {
+          emailId: email,
+          password: password
       })
         .then((response) => {
           // Successfully logged in the user
@@ -69,16 +69,28 @@ export default function LogIn( {navigation}: { navigation: any } ) {
           var userChallenge: Challenge = response.data;
           if (userChallenge == null) {
             // redirect to goal setting page
+            navigation.navigate("GoalSetting", {
+              itemId: 86,
+              otherParam: ""
+            })
           } else {
             // redirect to challenge page sending user challenge as props
+            navigation.navigate("Challenge", {
+              itemId: 86,
+              otherParam: "",
+              userChallenge: userChallenge
+            })
           }
           console.log(userChallenge.userId);
           
         })
         .catch((error) => {
           // Handle the error case
-          console.error("Error logging in user:", error);
-          Alert.alert("Error", "Failed to log in the user. Please try again.");
+          Alert.alert("Error", "User not found. Please create an account.");
+          navigation.navigate("CreateAccount", {
+            itemId: 86,
+            otherParam: ""
+          })
         });
     };
 
@@ -102,11 +114,7 @@ export default function LogIn( {navigation}: { navigation: any } ) {
             if(!isEmailValid){invalidAlert('Email id')}
             else if(!isPsswordValid){invalidAlert('Password')}
             else{
-              signInUser()
-              navigation.navigate("Walkthrough1", {
-                itemId: 86,
-                otherParam: "anything you want here",
-              });
+              logInUser()
           }
           }}
         >
@@ -122,7 +130,7 @@ export default function LogIn( {navigation}: { navigation: any } ) {
         })
       }}
       >
-      <Text style={textStyles.linkText}>Don't have account?Sign up</Text>
+      <Text style={textStyles.linkText}>Don't have account? Sign up!</Text>
       </Pressable>
     </View>
     </View>
