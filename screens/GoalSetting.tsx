@@ -9,6 +9,7 @@ export default function GoalSetting() {
         <Text style={textStyles.body}>Name your goal</Text>
         <TextInput style={inputStyles.input}></TextInput>
         <Text style={textStyles.body}>Select time</Text>
+        
       </View>
 
       <View style={buttonContainerStyle.container}>
@@ -68,9 +69,12 @@ const textStyles = StyleSheet.create({
 
 const inputStyles = StyleSheet.create({
   input: {
-    backgroundColor: "#F5F5F5",
-    top: 10,
-    borderRadius: 12,
+    width: "100%",
+      height: 40,
+      backgroundColor: "#F5F5F5",
+      marginTop: 10,
+      borderRadius: 4,
+      padding: 5,
   },
 });
 
