@@ -17,15 +17,15 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CreateAccount">
-        <Stack.Screen name="Walkthrough1" component={Walkthrough1} />
-        <Stack.Screen name="Walkthrough2" component={Walkthrough2} />
-        <Stack.Screen name="Walkthrough3" component={Walkthrough3} />
-        <Stack.Screen name="CreateAccount" component={CreateAccount} />
+      <Stack.Navigator initialRouteName="CreateAccount" >
+        <Stack.Screen name="Walkthrough1" component={Walkthrough1} options={{headerShown:false}} />
+        <Stack.Screen name="Walkthrough2" component={Walkthrough2} options={{headerShown:false}}/>
+        <Stack.Screen name="Walkthrough3" component={Walkthrough3} options={{headerShown:false}}/>
+        <Stack.Screen name="CreateAccount" component={CreateAccount} options={{headerShown:false}} />
         <Stack.Screen name="SplashScreen" component={SplashScreen} />
-        <Stack.Screen name="LogIn" component={LogIn} />
+        <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
         <Stack.Screen name="Loading" component={Loading} />
-        <Stack.Screen name="GoalSetting" component={GoalSetting} />
+        <Stack.Screen name="GoalSetting" component={GoalSetting} options={{headerShown:false}} />
         <Stack.Screen name="Challenge" component={Challenge} />
       </Stack.Navigator>
     </NavigationContainer>
