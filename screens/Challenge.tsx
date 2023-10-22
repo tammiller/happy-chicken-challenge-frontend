@@ -6,7 +6,7 @@ const { width } = Dimensions.get("window");
 
 export default function Challenge( {navigation}: { navigation: any } ) {
 
-  const negativeModalContent = 'Don\'t be discouraged. Keep going, you\'ve got this!';
+  const negativeModalContent = 'Don\'t be discouraged. keep going, you\'ve got this!';
   const neutralModalContent = "Progress is your middle name! Keep going!";
   const positiveModalContent = "Great job, keep up the fantastic work!";
  
