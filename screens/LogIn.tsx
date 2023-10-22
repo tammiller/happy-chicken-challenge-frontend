@@ -22,7 +22,7 @@ export default function LogIn( {navigation}: { navigation: any } ) {
     dailyEntries: DailyEntry []
   }
   interface DailyEntry {
-    id: Number,
+    id: String,
     entryDate: Date,
     status: String
   }
