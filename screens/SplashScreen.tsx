@@ -1,8 +1,19 @@
 import { View, Text, StyleSheet, Pressable, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, {useEffect} from 'react';
 
 export default function SplashScreen({ navigation }: { navigation: any }) {
+  useEffect(() => {
+    setTimeout(() => {
+      // check for login token and navigate
+      // for now navigating to CreateAccount
+      navigation.navigate("CreateAccount", {
+        itemId: 86,
+        otherParam: "anything you want here",
+      });
+    }, 2000)
+  })
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
@@ -27,6 +38,7 @@ const mainContainerStyle = StyleSheet.create({
     width: "100%",
     height: "100%",
     justifyContent: "center",
+    backgroundColor: '#A2FC9D'
   },
 });
 
@@ -35,13 +47,13 @@ const containerStyles = StyleSheet.create({
     flex: 1,
     width: '100%',
     alignContent: "center",
+    justifyContent: 'center'
   },
   logoStyle: {
     width: 100,
     height: 100,
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: 100
   }
 });
 
@@ -50,7 +62,7 @@ const textStyles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
-    marginTop: 20
+    marginTop: 26
   },
   subtitle: {
     fontSize: 20,

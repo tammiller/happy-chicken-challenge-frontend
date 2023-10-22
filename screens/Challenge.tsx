@@ -164,7 +164,7 @@ modalView: {
     height: 180, 
     width: width * 0.8, 
     backgroundColor: "#A2FC9D", 
-    borderRadius: 7, 
+    borderRadius: 10, 
 }, 
 });
 
