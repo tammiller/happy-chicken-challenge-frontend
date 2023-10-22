@@ -122,7 +122,7 @@ const logEntry = (logStatus: string) => {
     return request
   })
   axios
-  .post(`http://18.153.74.70/challenges/${challenges[0].challenge_id}/daily-entries`,{
+  .post(`http://18.153.74.70/challenges/${userId}/${challenges[0].challenge_id}/daily-entries`,{
     id: challenges[0].challenge_id,
     status: logStatus,
     date: '2023-10-22'
