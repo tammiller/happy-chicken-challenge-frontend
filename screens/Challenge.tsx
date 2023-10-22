@@ -1,13 +1,18 @@
-import { View, Text, StyleSheet, Pressable, Image, Dimensions, Modal } from "react-native";
+import { View, Text, StyleSheet, Pressable, Image, Dimensions, Modal, Share } from "react-native";
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { format } from 'date-fns';
+import axios from "axios";
 
 const { width } = Dimensions.get("window"); 
 
 const today = format(new Date(), 'MMM dd');
 
-export default function Challenge( {navigation}: { navigation: any } ) {
+export default function Challenge( {route, navigation}: { route: any, navigation: any } ) {
+
+
+  const userId = route.params.userId;
+  console.log('User details',userId)
 
   const negativeModalContent = 'Don\'t be discouraged. keep going, you\'ve got this!';
   const neutralModalContent = "Progress is your middle name! Keep going!";
@@ -15,26 +20,71 @@ export default function Challenge( {navigation}: { navigation: any } ) {
  
   const [modalContent, setModalContent] = useState('');
 
-  const daysCovered = 5
+  const [daysCovered, setDaysCovered] = useState(0);
+
+   var challenges : Challenge[]
+
   const progress = ( 100 * daysCovered ) / 14 ;
 
+  const title = "🌱";
+  const message = "Day "+daysCovered+" of 14 on my plant-based journey, only "+(14-daysCovered)+" days left to reach my goal!";
+
+
+  const options = {
+    title,
+    message
+  }
+
+  function onShareHandler(){
+    console.log("share clicked");
+    shareProgress()
+  }
+
+  function shareProgress(){
+    const share = async() => {
+      try{
+        var result = await Share.share(options).then()
+        console.log('share result ',result.action);
+      }catch(err){
+        console.log('error sharing ', err);
+      }
+    };
+  }
+
+  interface Challenge{
+    challenge_id: string,
+    start: string,
+    numberOfdays: string,
+    status: string,
+    dailyEntries: DailyEntry[]
+
+  }
+
+  interface DailyEntry{
+    id: string,
+    date: string,
+    status: string
+  }
 
   function onNegativeEntry(){
     console.log(" negative entry for the day");
    setModalContent(negativeModalContent);
    setModalVisible(true);
+   logEntry("BAD");
   }
 
   function onNeutralEntry(){
     console.log(" neutral entry for the day");
     setModalContent(neutralModalContent);
     setModalVisible(true);
+    logEntry("NEUTRAL");
   }
 
   function onPositiveEntry(){
     console.log(" positive entry for the day");
     setModalContent(positiveModalContent);
     setModalVisible(true);
+    logEntry("GOOD");
   }
 
   const[isModalVisible, setModalVisible] = useState(false);
@@ -45,8 +95,47 @@ export default function Challenge( {navigation}: { navigation: any } ) {
 }; 
 
 const getChallenge = () => {
+  axios
+  .get(`http://18.153.74.70/challenges/${userId}`,)
+  .then((response)=>{
+    if(typeof response.data != undefined  && response.data){
+    console.log("getChallenge ",response.data);
+    challenges = response.data;
+    console.log("Challenges retrieved ",challenges.length)
+    setDaysCovered(response.data[0].dailyEntries.length);
+    } else{
+      navigation.navigate("DefaultGoal", {
+        itemId: 86,
+        userId: userId,
+      })
+    }
 
+  })
+  .catch((error)=>{
+    console.log(error);
+  })
 }
+
+const logEntry = (logStatus: string) => {
+  axios.interceptors.request.use(request => {
+    console.log('Starting Request', JSON.stringify(request, null, 2))
+    return request
+  })
+  axios
+  .post(`http://18.153.74.70/challenges/${challenges[0].challenge_id}/daily-entries`,{
+    id: challenges[0].challenge_id,
+    status: logStatus,
+    date: '2023-10-22'
+  })
+  .then((response) => {
+    console.log("log Entry response ",response.data);
+  })
+  .catch((error) => {
+    console.log("error loggin entry ",error);
+  })
+}
+
+getChallenge()
 
   return (
     <View style={mainContainerStyle.container}>
@@ -54,17 +143,24 @@ const getChallenge = () => {
         <Text style={textStyles.title}>Cruelty Free Commit </Text>
         <Text style={containerStyles.progressTextContainer}>{daysCovered}/14</Text>
         <Text style={containerStyles.progressDays}>days</Text>
-        <View style={{marginTop: 20}}>
+        <View style={{ width: '100%'}}>
+        <View style={{marginTop: 20, alignItems: 'center', rotation: 90}}>
         <AnimatedCircularProgress
           size={175}
           width={8}
           fill={progress}
           tintColor= "#265F68" 
           onAnimationComplete={() => console.log('onAnimationComplete')}
-          backgroundColor="#A2FC9D" 
+          backgroundColor="#A2FC9D"
 
           />
           </View>
+          <Pressable onPress={onShareHandler}>
+            <Image style={buttonStyles.share} source={require('../assets/share.png')}></Image>
+            </Pressable>
+          </View>
+          
+        
           <View style={containerStyles.dailyEntryContainer}>
             <Text style={textStyles.dateText}>{today}</Text>
           <Text style={textStyles.body}>Have you moved closer to your goal today?</Text>
@@ -96,6 +192,7 @@ const getChallenge = () => {
                 </View> 
             </Modal> 
       </View>
+   
     </View>
   );
 }
@@ -211,4 +308,13 @@ const textStyles = StyleSheet.create({
       fontWeight: "bold",
       textAlign: "center",
     },
+
+    share: {
+      width: 24,
+      height: 24,
+      justifyContent: 'center',
+      alignSelf: 'flex-end',
+      marginRight: 20
+      
+    }
   });

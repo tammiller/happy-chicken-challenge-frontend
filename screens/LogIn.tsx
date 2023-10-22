@@ -1,11 +1,13 @@
 import { View, Text, StyleSheet, Pressable, TextInput, Alert } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
 import { REACT_APP_API } from '@env';
 
+
 export default function LogIn( {navigation}: { navigation: any } ) {
+
 
   const[email, setEmail] = useState('');
   const[password, setPasswrod] = useState('');
@@ -60,24 +62,26 @@ export default function LogIn( {navigation}: { navigation: any } ) {
     const logInUser = () => {
       axios
         .post(`http://18.153.74.70/users/login`, {
-          emailId: email,
+          email_id: email,
           password: password
       })
         .then((response) => {
           // Successfully logged in the user
           console.log("User logged in:", response.data);
+          console.log(" user id from response ",response.data.user_id);
+         
           var userChallenge: Challenge = response.data;
-          if (userChallenge == null) {
+          if (userChallenge == undefined ) {
             // redirect to goal setting page
-            navigation.navigate("GoalSetting", {
+            navigation.navigate("DefaultGoal", {
               itemId: 86,
-              otherParam: ""
+              userId: response.data.user_id
             })
           } else {
             // redirect to challenge page sending user challenge as props
             navigation.navigate("Challenge", {
               itemId: 86,
-              otherParam: "",
+              userId: response.data.user_id,
               userChallenge: userChallenge
             })
           }

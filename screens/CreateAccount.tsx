@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet, Pressable, TextInput, Alert } from "react-native";
-import { useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
 
+
 export default function CreateAccount({ navigation }: { navigation: any }) {
+
+
   const [email, setEmail] = useState("");
   const [password, setPasswrod] = useState("");
   const [name, setName] = useState("");
@@ -49,23 +52,29 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
     );
   };
 
+  interface UserResponse{
+    id: string,
+    name: string,
+    email_id: string
+  }
   const signUpUser = () => {
     axios.interceptors.request.use(request => {
       console.log('Starting Request', JSON.stringify(request, null, 2))
       return request
     })
     axios
-      .post(`http://18.153.74.70/users`, {
+      .post<UserResponse>(`http://18.153.74.70/users/signup`, {
         email_id: email,
         name: name,
         password: password
     })
       .then((response) => {
         // if account successfully created, go to walkthrough
-        console.log(response.data)
+        const userData = response.data;
+        console.log("userData from sign up ",userData);
         navigation.navigate("Walkthrough1", {
           itemId: 86,
-          otherParam: "anything you want here",
+          userId: userData.id,
         });
       })
       .catch((error) => {
@@ -114,12 +123,12 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
             } else if (!isPsswordValid) {
               invalidAlert("Password");
             } else {
-             // signUpUser() - TODO to be uncommented once sign up api is fixed
+              signUpUser()  //- TODO to be uncommented once sign up api is fixed
              // navigating without api call for testing
-             navigation.navigate("Walkthrough1", {
-              itemId: 86,
-              otherParam: "anything you want here",
-            });
+            //  navigation.navigate("Walkthrough1", {
+            //   itemId: 86,
+            //   otherParam: "anything you want here",
+            // });
 
             }
           }}
@@ -146,7 +155,9 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
 const buttonContainerStyle = StyleSheet.create({
   container: {
     width: "100%",
-    alignItems: "center",
+    justifyContent: "flex-end",
+     alignItems: 'center'
+   
   },
   linkContainer: {
     width: "100%",

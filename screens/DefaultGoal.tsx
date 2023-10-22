@@ -1,10 +1,17 @@
 import { StyleSheet, View, Text, Pressable, Modal, Dimensions } from "react-native";
-import { useState } from "react";
+import {  useState } from "react";
+import axios from "axios";
+
+
 
 const { width } = Dimensions.get("window");
 
-export default function DefaultGoal(  {navigation}: { navigation: any } ){
+export default function DefaultGoal(  {route, navigation}: {route:any, navigation: any } ){
 
+  
+  const userId = route.params.userId;
+  
+  console.log('User details: ',userId);
 
   const[isModalVisible, setModalVisible] = useState(false);
 
@@ -12,17 +19,40 @@ export default function DefaultGoal(  {navigation}: { navigation: any } ){
   const toggleModalVisibility = () => { 
     if(!isModalVisible){
         setModalVisible(true);
+        createChallenge()
         setTimeout(() => {
             setModalVisible(false)
             navigation.navigate("Challenge", {
                 itemId: 86,
-                otherParam: "anything you want here",
+                userId: userId,
               })
         }, 3000) 
     }
     
-    
  }; 
+
+ const createChallenge = () => {
+  axios.post('http://18.153.74.70/challenges',{
+    user_id: userId,
+    start: '2023-10-22',
+    numberOfDays: 14,
+    "status": "ACTIVE",
+    "dailyEntries": [
+      {
+        "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "date": "2023-10-22",
+        "status": "GOOD"
+      }
+    ]
+  })
+  .then((response) => {
+    console.log(response.data);
+   
+  })
+  .catch((error)=> {
+    console.log(error);
+  })
+ }
 
 
     return(

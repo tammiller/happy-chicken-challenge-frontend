@@ -1,8 +1,20 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { useRoute } from '@react-navigation/native';
+import AuthContext from "../store/auth-context";
+import { useContext, useState } from "react";
 
-export default function Walkthrough1( {navigation}: { navigation: any } ) {
+
+export default function Walkthrough1( { route, navigation}: { route: any, navigation: any } ) {
+
+ 
+
+  const userId = route.params.userId;
+
+
+  console.log("User details walkthrough ", route.params.userId);
+
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
@@ -19,7 +31,7 @@ export default function Walkthrough1( {navigation}: { navigation: any } ) {
             /* 1. Navigate to the GoalSetting route with params */
             navigation.navigate("Walkthrough2", {
               itemId: 86,
-              otherParam: "anything you want here",
+              userId: userId,
             });
           }}
         >
