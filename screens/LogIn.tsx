@@ -101,9 +101,11 @@ export default function LogIn( {navigation}: { navigation: any } ) {
         <Text style={textStyles.title}>Login</Text>
         <View style={containerStyles.inputContainer}>
         <Text style={textStyles.body}>Email</Text>
-        <TextInput style={textInputStyles(isEmailValid).textInput} onChangeText={onEmailChangeHandler}></TextInput>
+        <TextInput style={textInputStyles(isEmailValid).textInput} onChangeText={onEmailChangeHandler}   autoCapitalize='none'
+          inputMode="email"></TextInput>
         <Text style={textStyles.body}>Password</Text>
-        <TextInput style={textInputStyles(isPsswordValid).textInput} onChangeText={onPasswordChangeHandler}></TextInput>
+        <TextInput style={textInputStyles(isPsswordValid).textInput} onChangeText={onPasswordChangeHandler}  autoCapitalize='none'
+         secureTextEntry={true}></TextInput>
         </View>
       </View>
       <View style={buttonContainerStyle.container}>

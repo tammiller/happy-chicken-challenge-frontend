@@ -11,22 +11,24 @@ import Walkthrough2 from './screens/Walkthrough2';
 import Walkthrough3 from './screens/Walkthrough3';
 import SplashScreen from './screens/SplashScreen';
 import Challenge from './screens/Challenge';
+import DefaultGoal from './screens/DefaultGoal';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Challenge" >
+      <Stack.Navigator initialRouteName="SplashScreen" >
         <Stack.Screen name="Walkthrough1" component={Walkthrough1} options={{headerShown:false}} />
         <Stack.Screen name="Walkthrough2" component={Walkthrough2} options={{headerShown:false}}/>
         <Stack.Screen name="Walkthrough3" component={Walkthrough3} options={{headerShown:false}}/>
         <Stack.Screen name="CreateAccount" component={CreateAccount} options={{headerShown:false}} />
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
+        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{headerShown:false}}/>
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="GoalSetting" component={GoalSetting} options={{headerShown:false}} />
-        <Stack.Screen name="Challenge" component={Challenge} />
+        <Stack.Screen name="Challenge" component={Challenge} options={{headerShown:false}} />
+        <Stack.Screen name="DefaultGoal" component={DefaultGoal} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );

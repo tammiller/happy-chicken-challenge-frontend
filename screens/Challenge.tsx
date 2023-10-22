@@ -1,8 +1,11 @@
 import { View, Text, StyleSheet, Pressable, Image, Dimensions, Modal } from "react-native";
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { useState } from "react";
+import { format } from 'date-fns';
 
 const { width } = Dimensions.get("window"); 
+
+const today = format(new Date(), 'MMM dd');
 
 export default function Challenge( {navigation}: { navigation: any } ) {
 
@@ -11,6 +14,9 @@ export default function Challenge( {navigation}: { navigation: any } ) {
   const positiveModalContent = "Great job, keep up the fantastic work!";
  
   const [modalContent, setModalContent] = useState('');
+
+  const daysCovered = 5
+  const progress = ( 100 * daysCovered ) / 14 ;
 
 
   function onNegativeEntry(){
@@ -34,22 +40,25 @@ export default function Challenge( {navigation}: { navigation: any } ) {
   const[isModalVisible, setModalVisible] = useState(false);
 
 
-
   const toggleModalVisibility = () => { 
     setModalVisible(!isModalVisible); 
 }; 
+
+const getChallenge = () => {
+
+}
 
   return (
     <View style={mainContainerStyle.container}>
       <View style={containerStyles.container}>
         <Text style={textStyles.title}>Cruelty Free Commit </Text>
-        <Text style={containerStyles.progressTextContainer}> 1/30</Text>
+        <Text style={containerStyles.progressTextContainer}>{daysCovered}/14</Text>
         <Text style={containerStyles.progressDays}>days</Text>
         <View style={{marginTop: 20}}>
         <AnimatedCircularProgress
-          size={150}
+          size={175}
           width={8}
-          fill={1}
+          fill={progress}
           tintColor= "#265F68" 
           onAnimationComplete={() => console.log('onAnimationComplete')}
           backgroundColor="#A2FC9D" 
@@ -57,16 +66,17 @@ export default function Challenge( {navigation}: { navigation: any } ) {
           />
           </View>
           <View style={containerStyles.dailyEntryContainer}>
+            <Text style={textStyles.dateText}>{today}</Text>
           <Text style={textStyles.body}>Have you moved closer to your goal today?</Text>
           <View style={containerStyles.dailyEntryEmoji}>
             <Pressable onPress={onNegativeEntry}>
           <Image style={{width: 50, height: 50}} source={require('../assets/negative-entry.png')}></Image>
           </Pressable>
           <Pressable onPress={onNeutralEntry}>
-          <Image style={{width: 50, height: 50, marginLeft: 10}} source={require('../assets/neutral-entry.png')}></Image>
+          <Image style={{width: 50, height: 50, marginLeft: 20}} source={require('../assets/neutral-entry.png')}></Image>
           </Pressable>
           <Pressable onPress={onPositiveEntry}>
-          <Image style={{width: 50, height: 50,  marginLeft: 10}} source={require('../assets/positive-entry.png')}></Image>
+          <Image style={{width: 50, height: 50,  marginLeft: 20}} source={require('../assets/positive-entry.png')}></Image>
           </Pressable>
           </View>
           </View>
@@ -108,16 +118,18 @@ const containerStyles = StyleSheet.create({
 
   progressTextContainer: {
     position: "absolute",
-    marginTop: 175,
+    marginTop: 300,
     fontSize: 22,
-    textAlign: 'center'
+    textAlign: 'center',
+   
   },
 
   progressDays: {
     position: "absolute",
-    marginTop: 210,
+    marginTop: 340,
     fontSize: 14,
     textAlign: 'center',
+    justifyContent: 'center'
    
   },
 
@@ -152,7 +164,7 @@ modalView: {
     height: 180, 
     width: width * 0.8, 
     backgroundColor: "#A2FC9D", 
-    borderRadius: 7, 
+    borderRadius: 10, 
 }, 
 });
 
@@ -161,7 +173,7 @@ const textStyles = StyleSheet.create({
       fontSize: 20,
       fontWeight: "bold",
       textAlign: "left",
-      marginTop: 100
+      marginTop: 200
     },
     subtitle: {
       fontSize: 18,
@@ -176,8 +188,8 @@ const textStyles = StyleSheet.create({
       textAlign: "left",
       marginTop: 34,
     },
-    progressText: {
-     
+    dateText: {
+     fontSize: 18
 
     }
   });
