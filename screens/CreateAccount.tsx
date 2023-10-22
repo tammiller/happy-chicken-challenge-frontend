@@ -58,6 +58,7 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
     })
       .then((response) => {
         // if account successfully created, go to walkthrough
+        console.log(response.data)
         navigation.navigate("Walkthrough1", {
           itemId: 86,
           otherParam: "anything you want here",
@@ -65,6 +66,7 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
       })
       .catch((error) => {
         // if account NOT successfully created, display error message
+        console.error(error);
         Alert.alert("Error", "Sorry, we're having trouble creating your account right now. Please come back and try again later.");
       });
   };
@@ -83,11 +85,15 @@ export default function CreateAccount({ navigation }: { navigation: any }) {
         <TextInput
           style={textInputStyles(isEmailValid).textInput}
           onChangeText={onEmailChangeHandler}
+          autoCapitalize='none'
+          inputMode="email"
         ></TextInput>
         <Text style={textStyles.body}>Password</Text>
         <TextInput
           style={textInputStyles(isPsswordValid).textInput}
           onChangeText={onPasswordChangeHandler}
+          autoCapitalize='none'
+         secureTextEntry={true}
         ></TextInput>
       </View>
       <View style={buttonContainerStyle.container}>

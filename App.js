@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Challenge" >
+      <Stack.Navigator initialRouteName="LogIn" >
         <Stack.Screen name="Walkthrough1" component={Walkthrough1} options={{headerShown:false}} />
         <Stack.Screen name="Walkthrough2" component={Walkthrough2} options={{headerShown:false}}/>
         <Stack.Screen name="Walkthrough3" component={Walkthrough3} options={{headerShown:false}}/>
@@ -26,7 +26,7 @@ export default function App() {
         <Stack.Screen name="LogIn" component={LogIn} options={{headerShown:false}} />
         <Stack.Screen name="Loading" component={Loading} />
         <Stack.Screen name="GoalSetting" component={GoalSetting} options={{headerShown:false}} />
-        <Stack.Screen name="Challenge" component={Challenge} />
+        <Stack.Screen name="Challenge" component={Challenge} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
