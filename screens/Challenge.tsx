@@ -44,11 +44,11 @@ export default function Challenge( {route, navigation}: { route: any, navigation
     const share = async() => {
       try{
         var result = await Share.share(options).then()
-        console.log('share result ',result.action);
       }catch(err){
         console.log('error sharing ', err);
       }
     };
+    share()
   }
 
   interface Challenge{
@@ -314,7 +314,7 @@ const textStyles = StyleSheet.create({
       height: 24,
       justifyContent: 'center',
       alignSelf: 'flex-end',
-      marginRight: 20
+      marginRight: 105
       
     }
   });
